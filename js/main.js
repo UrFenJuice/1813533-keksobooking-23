@@ -14,8 +14,6 @@ const getRandomNumber = function (_minNumber, _maxNumber) {
 getRandomNumber(2, 4);
 
 const getRandomFloatNumber = function (_minNumber, _maxNumber, _floatSigns) {
-  _minNumber = Math.ceil(_minNumber);
-  _maxNumber = Math.floor(_maxNumber);
 
   if (_minNumber >= 0 && _maxNumber >= 0) {
     if (_minNumber >= _maxNumber) {
@@ -25,4 +23,4 @@ const getRandomFloatNumber = function (_minNumber, _maxNumber, _floatSigns) {
   }
 };
 
-getRandomFloatNumber(1.111, 9.999, 3);
+getRandomFloatNumber(1.1, 1.2, 2);
