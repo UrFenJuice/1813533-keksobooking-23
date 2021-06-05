@@ -24,3 +24,81 @@ const getRandomFloatNumber = function (_minNumber, _maxNumber, _floatSigns) {
 };
 
 getRandomFloatNumber(1.1, 1.2, 2);
+
+const TIME = [
+  '12:00',
+  '13:00',
+  '14:00',
+];
+
+const ROOM_TYPE = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel',
+];
+
+const FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+];
+
+const PHOTOS = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+];
+
+const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
+
+const getAuthor = function () {
+  const AUTHOR = {
+    avatar: `img/avatars/user0${  getRandomNumber(1, 8)  }.png`,
+  };
+  return AUTHOR;
+};
+
+const getLocation = function () {
+  const LOCATION = {
+    lat: getRandomFloatNumber(35.65000, 35.70000, 5),
+    lng: getRandomFloatNumber(139.70000, 139.80000, 5),
+  };
+  return LOCATION;
+};
+
+const getOffer = function () {
+  const OFFER = {
+    title: 'Объявление',
+    address: `${getLocation().lat  }, ${  getLocation().lng}`,
+    price: getRandomNumber(1, 99999),
+    type: getRandomArrayElement(ROOM_TYPE),
+    rooms: getRandomNumber(1, 20),
+    guests: getRandomNumber(1, 20),
+    checkin: getRandomArrayElement(TIME),
+    checkout: getRandomArrayElement(TIME),
+    features: FEATURES,
+    description: 'Комфортное жилье со всеми удобствами.',
+    photos: PHOTOS,
+  };
+  return OFFER;
+};
+
+const masterDataset = new Array(10).fill(null);
+
+const createOffer = function (masterArray) {
+  for (let i = 0; i <= masterArray.length - 1; ++i) {
+    masterArray[i] = {
+      author: getAuthor(),
+      offer: getLocation(),
+      location: getOffer(),
+    };
+  }
+  return masterArray;
+};
+
+createOffer(masterDataset);
