@@ -57,22 +57,20 @@ const PHOTOS = [
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 const getAuthor = function () {
-  const AUTHOR = {
+  return {
     avatar: `img/avatars/user0${  getRandomNumber(1, 8)  }.png`,
   };
-  return AUTHOR;
 };
 
 const getLocation = function () {
-  const LOCATION = {
+  return {
     lat: getRandomFloatNumber(35.65000, 35.70000, 5),
     lng: getRandomFloatNumber(139.70000, 139.80000, 5),
   };
-  return LOCATION;
 };
 
 const getOffer = function () {
-  const OFFER = {
+  return {
     title: 'Объявление',
     address: `${getLocation().lat  }, ${  getLocation().lng}`,
     price: getRandomNumber(1, 99999),
@@ -85,20 +83,18 @@ const getOffer = function () {
     description: 'Комфортное жилье со всеми удобствами.',
     photos: PHOTOS,
   };
-  return OFFER;
 };
 
-const masterDataset = new Array(10).fill(null);
-
-const createOffer = function (masterArray) {
-  for (let index = 0; index <= masterArray.length - 1; ++index) {
-    masterArray[index] = {
+const createOffers = function (length) {
+  const offers = [];
+  for (let index = 0; index <= length - 1; ++index) {
+    offers[index] = {
       author: getAuthor(),
       offer: getLocation(),
       location: getOffer(),
     };
   }
-  return masterArray;
+  return offers;
 };
 
-createOffer(masterDataset);
+const masterDataset = createOffers(10);
