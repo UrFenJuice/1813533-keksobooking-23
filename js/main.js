@@ -97,4 +97,4 @@ const createOffers = function (length) {
   return offers;
 };
 
-const masterDataset = createOffers(10);
+createOffers(10);
