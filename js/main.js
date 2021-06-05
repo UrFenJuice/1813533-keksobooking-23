@@ -91,13 +91,13 @@ const getOffer = function () {
 const masterDataset = new Array(10).fill(null);
 
 const createOffer = function (masterArray) {
-  masterArray.forEach((value, index, array) => {
+  for (let index = 0; index <= masterArray.length - 1; ++index) {
     masterArray[index] = {
       author: getAuthor(),
       offer: getLocation(),
       location: getOffer(),
     };
-  });
+  }
   return masterArray;
 };
 
