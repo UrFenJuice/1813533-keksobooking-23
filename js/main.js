@@ -11,9 +11,9 @@ import {confirmedInfo} from './filling-information/confirmed-information.js';
 import {showMessage} from './filling-information/show-message.js';
 import {showErrorMessage} from './filling-information/show-error-message.js';
 
-const adOffers = createOffers(1);
+const adOffers = createOffers(10);
 
-createAd(adOffers);
+createAd(adOffers[0], '#map-canvas');
 
 deactivatedApp();
 
