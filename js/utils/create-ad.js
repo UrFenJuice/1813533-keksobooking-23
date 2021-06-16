@@ -36,7 +36,7 @@ const createAd = function (offers) {
     const features = offer.location.features;
     const featureListElement = element.querySelector('.popup__features');
     const modifiers = features.map((feature) => `popup__feature--${feature}`);
-    //console.log(modifiers);
+
     featureListElement.querySelectorAll('.popup__feature')
       .forEach((item) => {
         const modifier = item.classList[1];
