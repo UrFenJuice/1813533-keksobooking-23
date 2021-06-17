@@ -1,6 +1,6 @@
 import {createOffers} from './utils/create-offers.js';
 
-import {deactivatedApp} from './state/deactivate-app.js';
+import {deactivatedApp} from './state/deactivated-app.js';
 import {activatedApp} from './state/activated-app.js';
 
 import {fillingInfo} from './filling-information/filling-information.js';
