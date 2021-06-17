@@ -1,5 +1,4 @@
-const createAd = function (offer, container) {
-  const adContainer = document.querySelector(container);
+const createAd = function (offer) {
   const card = document.querySelector('#card').content;
   const template = card.querySelector('.popup');
   const fragment = document.createDocumentFragment();
@@ -34,16 +33,13 @@ const createAd = function (offer, container) {
 
   const features = offer.location.features;
   const featureListElement = element.querySelector('.popup__features');
-  const modifiers = features.map((feature) => `popup__feature--${feature}`);
 
-  featureListElement.querySelectorAll('.popup__feature')
-    .forEach((item) => {
-      const modifier = item.classList[1];
+  // собираем html-строку, состоящую из нужных тегов
+  const featuresHtml = features.map(
+    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью `.map` собираем массив из строк
+  ).join(''); // методом .join склеиваем его в одну строку
 
-      if (! modifiers.includes(modifier)) {
-        item.remove();
-      }
-    });
+  featureListElement.innerHTML = featuresHtml;
   element.querySelector('.popup__description').textContent = offer.location.description;
 
 
@@ -56,13 +52,12 @@ const createAd = function (offer, container) {
     elementPhoto.src = photo;
     fragmentPhoto.appendChild(elementPhoto);
   });
-  photosBlock.children[0].remove();
+  photosBlock.innerHTML = '';
   photosBlock.appendChild(fragmentPhoto);
 
   element.querySelector('.popup__avatar').src = offer.author.avatar;
 
-  fragment.appendChild(element);
-  adContainer.appendChild(fragment);
+  return fragment.appendChild(element);
 };
 
 export {createAd};

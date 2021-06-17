@@ -13,7 +13,9 @@ import {showErrorMessage} from './filling-information/show-error-message.js';
 
 const adOffers = createOffers(10);
 
-createAd(adOffers[0], '#map-canvas');
+const mapCanvas = document.querySelector('#map-canvas');
+
+mapCanvas.appendChild(createAd(adOffers[0]));
 
 deactivatedApp();
 
