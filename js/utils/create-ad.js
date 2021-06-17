@@ -56,8 +56,9 @@ const createAd = function (offer) {
   photosBlock.appendChild(fragmentPhoto);
 
   element.querySelector('.popup__avatar').src = offer.author.avatar;
+  fragment.appendChild(element);
 
-  return fragment.appendChild(element);
+  return fragment;
 };
 
 export {createAd};
