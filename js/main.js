@@ -1,7 +1,7 @@
 import {createOffers} from './utils/create-offers.js';
 
-import {deactivatedApp} from './state/deactivated-app.js';
-import {activatedApp} from './state/activated-app.js';
+import {deactivateApp} from './state/deactivate-app.js';
+import {activateApp} from './state/activate-app.js';
 
 import {fillingInfo} from './filling-information/filling-information.js';
 import {publishInfo} from './filling-information/publish-information.js';
@@ -12,9 +12,9 @@ import {showErrorMessage} from './filling-information/show-error-message.js';
 
 createOffers(10);
 
-deactivatedApp();
+deactivateApp();
 
-activatedApp();
+activateApp();
 
 fillingInfo();
 

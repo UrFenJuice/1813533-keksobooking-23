@@ -1,20 +1,20 @@
-const deactivatedApp = function () {
+const activateApp = function () {
   const form = document.querySelector('.ad-form');
-  form.classList.add('ad-form--disabled');
+  form.classList.remove('ad-form--disabled');
 
   const formElements = form.querySelectorAll('fieldset');
   formElements.forEach((element) => {
-    element.disabled = true;
+    element.disabled = false;
   });
 
   const mapFilter = document.querySelector('.map__filters');
-  mapFilter.classList.add('map__filters--disabled');
+  mapFilter.classList.remove('map__filters--disabled');
   const mapFilters = mapFilter.querySelectorAll('select');
   mapFilters.forEach((element) => {
-    element.disabled = true;
+    element.disabled = false;
   });
   const mapFilterElement = mapFilter.querySelector('fieldset');
-  mapFilterElement.disabled = true;
+  mapFilterElement.disabled = false;
 };
 
-export {deactivatedApp};
+export {activateApp};
