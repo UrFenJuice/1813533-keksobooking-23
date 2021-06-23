@@ -109,10 +109,10 @@ const capacityChangeHandler = function (evt) {
 capacity.addEventListener('change', capacityChangeHandler);
 
 const roomValueValidate = function (targetElement) {
-  for (let i = 0; i < housesType.length; i++) {
-    if (housesType[i].type === targetElement.value) {
-      price.min = housesType[i].price;
-      price.placeholder = housesType[i].price;
+  for (let index = 0; index < housesType.length; index++) {
+    if (housesType[index].type === targetElement.value) {
+      price.min = housesType[index].price;
+      price.placeholder = housesType[index].price;
     }
   }
 };
