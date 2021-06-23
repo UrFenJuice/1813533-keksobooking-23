@@ -117,6 +117,8 @@ const roomValueValidate = function (targetElement) {
   }
 };
 
+roomValueValidate(roomValue);
+
 const roomValueChangeHandler = function (evt) {
   roomValueValidate(evt.target);
 };
