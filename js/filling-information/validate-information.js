@@ -144,7 +144,6 @@ const formChangeHandler = function () {
   roomNumberValidate(roomNumber);
   roomValueValidate(roomValue);
   timeInOut(timeIn);
-  timeInOut(timeOut);
 };
 
 form.addEventListener('submit', formChangeHandler);
