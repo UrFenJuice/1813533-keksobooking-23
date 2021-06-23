@@ -1,12 +1,37 @@
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
+const housesType = [
+  {
+    type: 'bungalow',
+    price: 0,
+  },
+  {
+    type: 'flat',
+    price: 1000,
+  },
+  {
+    type: 'hotel',
+    price: 3000,
+  },
+  {
+    type: 'house',
+    price: 5000,
+  },
+  {
+    type: 'palace',
+    price: 10000,
+  },
+];
 
 const form = document.querySelector('.ad-form');
 const title = form.querySelector('#title');
 const price = form.querySelector('#price');
 const roomNumber = form.querySelector('#room_number');
 const capacity = form.querySelector('#capacity');
+const roomValue = form.querySelector('#type');
+const timeIn = form.querySelector('#timein');
+const timeOut = form.querySelector('#timeout');
 
 const titleValidate = function () {
   const valueLength = title.value.length;
@@ -83,11 +108,43 @@ const capacityChangeHandler = function (evt) {
 
 capacity.addEventListener('change', capacityChangeHandler);
 
+const roomValueValidate = function (targetElement) {
+  for (let i = 0; i < housesType.length; i++) {
+    if (housesType[i].type === targetElement.value) {
+      price.min = housesType[i].price;
+      price.placeholder = housesType[i].price;
+    }
+  }
+};
+
+const roomValueChangeHandler = function (evt) {
+  roomValueValidate(evt.target);
+};
+
+roomValue.addEventListener('change', roomValueChangeHandler);
+
+const timeInOut = function (targetElement) {
+  if (targetElement !== timeIn) {
+    timeIn.value = targetElement.value;
+  } else {
+    timeOut.value = targetElement.value;
+  }
+};
+
+const timeInOutChangeHandler = function (evt) {
+  timeInOut(evt.target);
+};
+
+timeIn.addEventListener('change', timeInOutChangeHandler);
+timeOut.addEventListener('change', timeInOutChangeHandler);
 
 const formChangeHandler = function () {
   titleValidate();
   priceValidate();
   roomNumberValidate(roomNumber);
+  roomValueValidate(roomValue);
+  timeInOut(timeIn);
+  timeInOut(timeOut);
 };
 
 form.addEventListener('submit', formChangeHandler);
