@@ -1,7 +1,9 @@
 import {map} from './create-map.js';
 import {createAd} from './create-ad.js';
 
-const createMapLable = function (item) {
+const markerGroup = L.layerGroup().addTo(map);
+
+const createMapLable = (item) => {
   const lat = item.offer.lat;
   const lng = item.offer.lng;
   const icon = L.icon({
@@ -21,7 +23,7 @@ const createMapLable = function (item) {
   );
 
   marker
-    .addTo(map)
+    .addTo(markerGroup)
     .bindPopup(
       createAd(item),
       {

@@ -1,7 +1,6 @@
-const createAd = function (offer) {
+const createAd = (offer) => {
   const card = document.querySelector('#card').content;
   const template = card.querySelector('.popup');
-  const fragment = document.createDocumentFragment();
 
   const element = template.cloneNode(true);
 
@@ -65,9 +64,7 @@ const createAd = function (offer) {
     }
   }
 
-  fragment.appendChild(element);
-
-  return fragment;
+  return element;
 };
 
 export {createAd};

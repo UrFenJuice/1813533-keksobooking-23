@@ -9,7 +9,7 @@ const map = L.map('map-canvas')
     lng: 139.69171,
   }, 10);
 
-const createMap = function () {
+const createMap = () => {
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -39,7 +39,7 @@ const createMap = function () {
   address.value = `${ mainPinMarker.getLatLng().lat } , ${ mainPinMarker._latlng.lng }`;
   mainPinMarker.on('dragend',(evt)=> {
     const chagedPos = evt.target.getLatLng();
-    address.value = `${ chagedPos.lat.toFixed(5) } , ${ chagedPos.lng.toFixed(5) }`;
+    address.value = `${ chagedPos.lat.toFixed(5) }, ${ chagedPos.lng.toFixed(5) }`;
   });
 
   map.whenReady(activateApp);
