@@ -5,6 +5,8 @@ const createAd = function (offer) {
 
   const element = template.cloneNode(true);
 
+  const allElements = element.children;
+
   element.querySelector('.popup__title').textContent = offer.location.title;
   element.querySelector('.popup__text--address').textContent = offer.location.address;
   element.querySelector('.popup__text--price').textContent = `${offer.location.price  } ₽/ночь`;
@@ -56,6 +58,13 @@ const createAd = function (offer) {
   photosBlock.appendChild(fragmentPhoto);
 
   element.querySelector('.popup__avatar').src = offer.author.avatar;
+
+  for (let index = 0; index < allElements.length; index++) {
+    if (allElements[index].innerHTML === '' && !allElements[index].classList.contains('popup__avatar')) {
+      allElements[index].style.display = 'none';
+    }
+  }
+
   fragment.appendChild(element);
 
   return fragment;
