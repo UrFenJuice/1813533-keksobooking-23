@@ -1,9 +1,10 @@
-const createAd = function (offer) {
+const createAd = (offer) => {
   const card = document.querySelector('#card').content;
   const template = card.querySelector('.popup');
-  const fragment = document.createDocumentFragment();
 
   const element = template.cloneNode(true);
+
+  const allElements = element.children;
 
   element.querySelector('.popup__title').textContent = offer.location.title;
   element.querySelector('.popup__text--address').textContent = offer.location.address;
@@ -56,9 +57,14 @@ const createAd = function (offer) {
   photosBlock.appendChild(fragmentPhoto);
 
   element.querySelector('.popup__avatar').src = offer.author.avatar;
-  fragment.appendChild(element);
 
-  return fragment;
+  for (let index = 0; index < allElements.length; index++) {
+    if (allElements[index].innerHTML === '' && !allElements[index].classList.contains('popup__avatar')) {
+      allElements[index].style.display = 'none';
+    }
+  }
+
+  return element;
 };
 
 export {createAd};
