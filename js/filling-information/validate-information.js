@@ -140,12 +140,4 @@ const timeInOutChangeHandler = function (evt) {
 timeIn.addEventListener('change', timeInOutChangeHandler);
 timeOut.addEventListener('change', timeInOutChangeHandler);
 
-const formChangeHandler = function () {
-  titleValidate();
-  priceValidate();
-  roomNumberValidate(roomNumber);
-  roomValueValidate(roomValue);
-  timeInOut(timeIn);
-};
-
-form.addEventListener('submit', formChangeHandler);
+export {titleValidate, priceValidate, roomNumberValidate, roomNumber, roomValueValidate, roomValue, timeInOut, timeIn, form};
