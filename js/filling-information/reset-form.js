@@ -1,7 +1,7 @@
 import {markerGroup, createMarker} from '../utils/create-map.js';
 
-const resetForm = (event) => {
-  event.preventDefault();
+const resetForm = (evt) => {
+  evt.preventDefault();
   document.querySelector('.ad-form').reset();
   document.querySelector('.map__filters').reset();
   markerGroup.clearLayers();
