@@ -19,15 +19,7 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-const createMap = () => {
-
-  L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    },
-  ).addTo(map);
-
+const createMarker = () => {
   const mainPinMarker = L.marker(
     {
       lat: defaultLat,
@@ -46,8 +38,20 @@ const createMap = () => {
     const chagedPos = evt.target.getLatLng();
     address.value = `${ chagedPos.lat.toFixed(5) }, ${ chagedPos.lng.toFixed(5) }`;
   });
+};
+
+const createMap = () => {
+
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
+
+  createMarker();
 
   map.whenReady(activateApp);
 };
 
-export {createMap, map, defaultLat, defaultLng, address, markerGroup, mainPinIcon};
+export {createMap, map, defaultLat, defaultLng, address, markerGroup, mainPinIcon, createMarker};
