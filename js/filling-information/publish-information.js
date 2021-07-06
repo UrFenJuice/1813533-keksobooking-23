@@ -1,4 +1,4 @@
-import {titleValidate, priceValidate, roomNumberValidate, roomNumber, roomValueValidate, roomValue, timeInOut, timeIn, form} from './validate-information.js';
+import {titleValidate, priceValidate, roomNumberValidate, roomNumber, capacityValidate, capacity, roomValueValidate, roomValue, timeInOut, timeIn, form} from './validate-information.js';
 import {showErrorMessage} from './show-error-message.js';
 import {hideMessage} from './hide-message.js';
 import {showMessage} from './show-message.js';
@@ -10,6 +10,7 @@ const publishInfo = () => {
     titleValidate();
     priceValidate();
     roomNumberValidate(roomNumber);
+    capacityValidate(capacity);
     roomValueValidate(roomValue);
     timeInOut(timeIn);
 

@@ -63,19 +63,16 @@ price.addEventListener('input', priceValidate);
 
 const roomNumberValidate = function (targetElement) {
 
-  if (capacity.value !== targetElement.value) {
-    if (+targetElement.value > 99) {
-      if (capacity.value !== '0') {
-        targetElement.setCustomValidity(`Эта недвижимость ${ capacity.querySelector('option[value="0"]').textContent }`);
-      } else {
-        targetElement.setCustomValidity('');
-      }
+  if (+targetElement.value >= +capacity.value) {
+    if (+targetElement.value === 100 && +capacity.value !== 0) {
+      targetElement.setCustomValidity(`Эта недвижимость ${ capacity.querySelector('option[value="0"]').textContent }`);
     } else {
-      targetElement.setCustomValidity(`Эта недвижимость ${ capacity.querySelector(`option[value="${ targetElement.value }"]`).textContent }`);
+      targetElement.setCustomValidity('');
     }
   } else {
-    targetElement.setCustomValidity('');
+    targetElement.setCustomValidity(`Эта недвижимость ${ capacity.querySelector(`option[value="${ targetElement.value }"]`).textContent } или менее`);
   }
+
   targetElement.reportValidity();
 };
 
@@ -85,25 +82,22 @@ const roomNumberChangeHandler = function (evt) {
 
 roomNumber.addEventListener('change', roomNumberChangeHandler);
 
-const capacityChangeHandler = function (evt) {
-  const targetElement = evt.target;
-
-  if (roomNumber.value !== targetElement.value) {
-    if (+targetElement.value < 1) {
-      if (roomNumber.value !== '100') {
-        targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector('option[value="100"]').textContent }`);
-      } else {
-        targetElement.setCustomValidity('');
-      }
-
+const capacityValidate = function (targetElement) {
+  if (+targetElement.value <= +roomNumber.value) {
+    if (+targetElement.value === 0 && +roomNumber.value !== 100) {
+      targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector('option[value="100"]').textContent }`);
     } else {
-      targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector(`option[value="${ targetElement.value }"]`).textContent }`);
+      targetElement.setCustomValidity('');
     }
   } else {
-    targetElement.setCustomValidity('');
+    targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector(`option[value="${ targetElement.value }"]`).textContent }`);
   }
 
   targetElement.reportValidity();
+};
+
+const capacityChangeHandler = function (evt) {
+  capacityValidate(evt.target);
 };
 
 capacity.addEventListener('change', capacityChangeHandler);
@@ -140,4 +134,4 @@ const timeInOutChangeHandler = function (evt) {
 timeIn.addEventListener('change', timeInOutChangeHandler);
 timeOut.addEventListener('change', timeInOutChangeHandler);
 
-export {titleValidate, priceValidate, roomNumberValidate, roomNumber, roomValueValidate, roomValue, timeInOut, timeIn, form};
+export {titleValidate, priceValidate, roomNumberValidate, roomNumber, capacityValidate, capacity, roomValueValidate, roomValue, timeInOut, timeIn, form};
