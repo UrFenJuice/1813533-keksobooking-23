@@ -7,31 +7,35 @@ const publishInfo = () => {
 
   const formChangeHandler = function (evt) {
     evt.preventDefault();
-    titleValidate();
-    priceValidate();
-    roomNumberValidate(roomNumber);
-    capacityValidate(capacity);
-    roomValueValidate(roomValue);
-    timeInOut(timeIn);
 
+    const validateMyForm = new Promise(() => {
+      titleValidate();
+      priceValidate();
+      roomNumberValidate(roomNumber);
+      capacityValidate(capacity);
+      roomValueValidate(roomValue);
+      timeInOut(timeIn);
+    });
 
-    fetch(
-      'https://23.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: new FormData(evt.target),
-      },
-    )
-      .then((response) => {
-        if (response.ok) {
-          return showMessage();
-        }
+    validateMyForm.then(() => {
+      fetch(
+        'https://23.javascript.pages.academy/keksobooking',
+        {
+          method: 'POST',
+          body: new FormData(evt.target),
+        },
+      )
+        .then((response) => {
+          if (response.ok) {
+            return showMessage();
+          }
 
-        throw new Error(`${response.status} ${response.statusText}`);
-      })
-      .catch(() => {
-        showErrorMessage('', hideMessage);
-      });
+          throw new Error(`${response.status} ${response.statusText}`);
+        })
+        .catch(() => {
+          showErrorMessage('', hideMessage);
+        });
+    });
   };
 
   form.addEventListener('submit', formChangeHandler);
