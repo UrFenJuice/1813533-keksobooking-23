@@ -1,37 +1,33 @@
 import {resetForm} from './reset-form.js';
 
 const showMessage = () => {
-  const showMess = new Promise((resolve) => {
-    const card = document.querySelector('#success').content;
-    const template = card.querySelector('.success');
+  const card = document.querySelector('#success').content;
+  const template = card.querySelector('.success');
 
-    const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
 
-    const element = template.cloneNode(true);
+  const element = template.cloneNode(true);
 
-    fragment.appendChild(element);
+  fragment.appendChild(element);
 
-    resolve(document.querySelector('body').appendChild(fragment));
+  document.querySelector('body').appendChild(fragment);
+
+  const popup = document.querySelector('.success');
+  const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+  popup.addEventListener('click', () => {
+    popup.remove();
   });
 
-  showMess.then(() => {
-    const popup = document.querySelector('.success');
-    const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
-
-    popup.addEventListener('click', () => {
+  const onPopupEscKeydown = (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
       popup.remove();
-    });
+    }
+  };
+  document.addEventListener('keydown', onPopupEscKeydown);
 
-    const onPopupEscKeydown = (evt) => {
-      if (isEscEvent(evt)) {
-        evt.preventDefault();
-        popup.remove();
-      }
-    };
-    document.addEventListener('keydown', onPopupEscKeydown);
-
-    resetForm();
-  });
+  resetForm();
 };
 
 export {showMessage};

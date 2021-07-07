@@ -1,24 +1,35 @@
-const showErrorMessage = (error, hideError) => {
-  const showError = new Promise((resolve) => {
-    const card = document.querySelector('#error').content;
-    const template = card.querySelector('.error');
+const showErrorMessage = (error) => {
+  const card = document.querySelector('#error').content;
+  const template = card.querySelector('.error');
+  const fragment = document.createDocumentFragment();
+  const element = template.cloneNode(true);
 
-    const fragment = document.createDocumentFragment();
+  const closeButton = document.querySelector('.error__button');
+  const popup = document.querySelector('.error');
+  const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-    const element = template.cloneNode(true);
+  if (error) {
+    element.querySelector('.error__message').textContent = error;
+  }
 
-    if (error) {
-      element.querySelector('.error__message').textContent = error;
+  fragment.appendChild(element);
+  document.querySelector('body').appendChild(fragment);
+
+
+  closeButton.addEventListener('click', () => {
+    popup.remove();
+  });
+  popup.addEventListener('click', () => {
+    popup.remove();
+  });
+
+  const onPopupEscKeydown = (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      popup.remove();
     }
-
-    fragment.appendChild(element);
-
-    resolve(document.querySelector('body').appendChild(fragment));
-  });
-
-  showError.then(() => {
-    hideError();
-  });
+  };
+  document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 export {showErrorMessage};

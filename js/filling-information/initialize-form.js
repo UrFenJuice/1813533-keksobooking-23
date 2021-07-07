@@ -1,23 +1,20 @@
 import {titleValidate, priceValidate, roomNumberValidate, roomNumber, capacityValidate, capacity, roomValueValidate, roomValue, timeInOut, timeIn, form} from './validate-information.js';
 import {showErrorMessage} from './show-error-message.js';
-import {hideMessage} from './hide-message.js';
 import {showMessage} from './show-message.js';
 
-const publishInfo = () => {
+const initializeForm = () => {
 
   const formChangeHandler = function (evt) {
     evt.preventDefault();
 
-    const validateMyForm = new Promise(() => {
-      titleValidate();
-      priceValidate();
-      roomNumberValidate(roomNumber);
-      capacityValidate(capacity);
-      roomValueValidate(roomValue);
-      timeInOut(timeIn);
-    });
+    titleValidate();
+    priceValidate();
+    roomNumberValidate(roomNumber);
+    capacityValidate(capacity);
+    roomValueValidate(roomValue);
+    timeInOut(timeIn);
 
-    validateMyForm.then(() => {
+    if (evt.target.reportValidity()) {
       fetch(
         'https://23.javascript.pages.academy/keksobooking',
         {
@@ -33,12 +30,12 @@ const publishInfo = () => {
           throw new Error(`${response.status} ${response.statusText}`);
         })
         .catch(() => {
-          showErrorMessage('', hideMessage);
+          showErrorMessage('');
         });
-    });
+    }
   };
 
   form.addEventListener('submit', formChangeHandler);
 };
 
-export {publishInfo};
+export {initializeForm};

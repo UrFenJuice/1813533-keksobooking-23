@@ -5,13 +5,12 @@ import {createMap} from './utils/create-map.js';
 import {createMapLable} from './utils/create-map-lable.js';
 
 import {fillingInfo} from './filling-information/filling-information.js';
-import {publishInfo} from './filling-information/publish-information.js';
+import {initializeForm} from './filling-information/initialize-form.js';
 import './filling-information/validate-information.js';
 import {showErrorMessage} from './filling-information/show-error-message.js';
-import {hideMessage} from './filling-information/hide-message.js';
 import {resetForm} from './filling-information/reset-form.js';
 
-const resetBtn = document.querySelector('.ad-form__reset');
+const form = document.querySelector('.ad-form');
 
 deactivateApp();
 
@@ -24,11 +23,14 @@ const fetchOffers = fillingInfo(
     });
   },
   (err) => {
-    showErrorMessage(err, hideMessage);
+    showErrorMessage(err);
   });
 
 fetchOffers();
 
-publishInfo();
+initializeForm();
 
-resetBtn.addEventListener('click', resetForm);
+form.addEventListener('reset', (evt) => {
+  evt.preventDefault();
+  resetForm();
+});
