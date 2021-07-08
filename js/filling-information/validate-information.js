@@ -72,12 +72,12 @@ const roomNumberValidate = function (targetElement) {
   } else {
     targetElement.setCustomValidity(`Эта недвижимость ${ capacity.querySelector(`option[value="${ targetElement.value }"]`).textContent } или менее`);
   }
-
   targetElement.reportValidity();
 };
 
 const roomNumberChangeHandler = function (evt) {
   roomNumberValidate(evt.target);
+  capacityValidate(capacity);
 };
 
 roomNumber.addEventListener('change', roomNumberChangeHandler);
@@ -86,18 +86,19 @@ const capacityValidate = function (targetElement) {
   if (+targetElement.value <= +roomNumber.value) {
     if (+targetElement.value === 0 && +roomNumber.value !== 100) {
       targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector('option[value="100"]').textContent }`);
+      
     } else {
       targetElement.setCustomValidity('');
     }
   } else {
     targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector(`option[value="${ targetElement.value }"]`).textContent }`);
   }
-
   targetElement.reportValidity();
 };
 
 const capacityChangeHandler = function (evt) {
   capacityValidate(evt.target);
+  roomNumberValidate(roomNumber);
 };
 
 capacity.addEventListener('change', capacityChangeHandler);

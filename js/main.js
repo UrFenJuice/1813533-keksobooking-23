@@ -10,7 +10,7 @@ import './filling-information/validate-information.js';
 import {showErrorMessage} from './filling-information/show-error-message.js';
 import {resetForm} from './filling-information/reset-form.js';
 
-const form = document.querySelector('.ad-form');
+const resetButton = document.querySelector('.ad-form__reset');
 
 deactivateApp();
 
@@ -30,7 +30,7 @@ fetchOffers();
 
 initializeForm();
 
-form.addEventListener('reset', (evt) => {
+resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   resetForm();
 });
