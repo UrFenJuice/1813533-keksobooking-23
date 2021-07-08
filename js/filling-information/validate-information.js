@@ -77,7 +77,6 @@ const roomNumberValidate = function (targetElement) {
 
 const roomNumberChangeHandler = function (evt) {
   roomNumberValidate(evt.target);
-  capacityValidate(capacity);
 };
 
 roomNumber.addEventListener('change', roomNumberChangeHandler);
@@ -86,7 +85,7 @@ const capacityValidate = function (targetElement) {
   if (+targetElement.value <= +roomNumber.value) {
     if (+targetElement.value === 0 && +roomNumber.value !== 100) {
       targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector('option[value="100"]').textContent }`);
-      
+
     } else {
       targetElement.setCustomValidity('');
     }
