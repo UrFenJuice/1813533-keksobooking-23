@@ -6,12 +6,12 @@ const createAd = (offer) => {
 
   const allElements = element.children;
 
-  element.querySelector('.popup__title').textContent = offer.location.title;
-  element.querySelector('.popup__text--address').textContent = offer.location.address;
-  element.querySelector('.popup__text--price').textContent = `${offer.location.price  } ₽/ночь`;
+  element.querySelector('.popup__title').textContent = offer.offer.title;
+  element.querySelector('.popup__text--address').textContent = offer.offer.address;
+  element.querySelector('.popup__text--price').textContent = `${offer.offer.price  } ₽/ночь`;
 
   let typeOfHousing;
-  switch (offer.location.type) {
+  switch (offer.offer.type) {
     case 'flat':
       typeOfHousing = 'Квартира';
       break;
@@ -29,32 +29,43 @@ const createAd = (offer) => {
       break;
   }
   element.querySelector('.popup__type').textContent = typeOfHousing;
-  element.querySelector('.popup__text--capacity').textContent = `${offer.location.rooms  } комнаты для ${  offer.location.guests  } гостей`;
-  element.querySelector('.popup__text--time').textContent = `Заезд после ${  offer.location.checkin  }, выезд до ${  offer.location.checkout}`;
+  element.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms  } комнаты для ${  offer.offer.guests  } гостей`;
+  element.querySelector('.popup__text--time').textContent = `Заезд после ${  offer.offer.checkin  }, выезд до ${  offer.offer.checkout}`;
 
-  const features = offer.location.features;
+  const features = offer.offer.features;
   const featureListElement = element.querySelector('.popup__features');
 
-  // собираем html-строку, состоящую из нужных тегов
-  const featuresHtml = features.map(
-    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью `.map` собираем массив из строк
-  ).join(''); // методом .join склеиваем его в одну строку
+  if(features) {
+    // собираем html-строку, состоящую из нужных тегов
+    const featuresHtml = features.map(
+      (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью `.map` собираем массив из строк
+    ).join(''); // методом .join склеиваем его в одну строку
 
-  featureListElement.innerHTML = featuresHtml;
-  element.querySelector('.popup__description').textContent = offer.location.description;
+    featureListElement.innerHTML = featuresHtml;
+  } else {
+    featureListElement.style.display = 'none';
+  }
 
 
-  const offerPhotos = offer.location.photos;
+  element.querySelector('.popup__description').textContent = offer.offer.description;
+
+
+  const offerPhotos = offer.offer.photos;
   const photosBlock = element.querySelector('.popup__photos');
   const newPhoto = card.querySelector('.popup__photo');
   const fragmentPhoto = document.createDocumentFragment();
-  offerPhotos.forEach((photo) => {
-    const elementPhoto = newPhoto.cloneNode(true);
-    elementPhoto.src = photo;
-    fragmentPhoto.appendChild(elementPhoto);
-  });
-  photosBlock.innerHTML = '';
-  photosBlock.appendChild(fragmentPhoto);
+  if (offerPhotos) {
+    offerPhotos.forEach((photo) => {
+      const elementPhoto = newPhoto.cloneNode(true);
+      elementPhoto.src = photo;
+      fragmentPhoto.appendChild(elementPhoto);
+    });
+    photosBlock.innerHTML = '';
+    photosBlock.appendChild(fragmentPhoto);
+  } else {
+    photosBlock.style.display = 'none';
+  }
+
 
   element.querySelector('.popup__avatar').src = offer.author.avatar;
 
