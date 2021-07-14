@@ -10,12 +10,7 @@ import './filling-information/validate-information.js';
 import {showErrorMessage} from './filling-information/show-error-message.js';
 import {resetForm} from './filling-information/reset-form.js';
 
-import {housingTypeSort} from './sorting-information/housing-type.js';
-import {housingPriceSort} from './sorting-information/housing-price.js';
-import {housingRoomsSort} from './sorting-information/housing-rooms.js';
-import {housingGuestsSort} from './sorting-information/housing-guests.js';
-import {housingFeaturesSort} from './sorting-information/housing-features.js';
-import {sortingInformation} from './sorting-information/sorting-information.js';
+import {filterInformation} from './filter-information/filter-information.js';
 
 const resetButton = document.querySelector('.ad-form__reset');
 
@@ -25,12 +20,7 @@ createMap();
 
 const fetchOffers = fillingInfo(
   (offers) => {
-    // housingTypeSort(offers);
-    // housingPriceSort(offers);
-    // housingRoomsSort(offers);
-    // housingGuestsSort(offers);
-    // housingFeaturesSort(offers);
-    sortingInformation(offers);
+    filterInformation(offers);
 
     const offersSlice = offers.slice(0, 10);
     offersSlice.forEach((offer) => {
