@@ -16,10 +16,11 @@ const housingPriceSort = (offers) => {
       }
       return false;
     });
-    const offerSortSlice = offerSort.slice(0, 10);
-    offerSortSlice.forEach((offer) => {
-      createMapLable(offer);
-    });
+    // const offerSortSlice = offerSort.slice(0, 10);
+    // offerSortSlice.forEach((offer) => {
+    //   createMapLable(offer);
+    // });
+    return offerSort;
   });
 };
 

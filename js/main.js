@@ -14,6 +14,8 @@ import {housingTypeSort} from './sorting-information/housing-type.js';
 import {housingPriceSort} from './sorting-information/housing-price.js';
 import {housingRoomsSort} from './sorting-information/housing-rooms.js';
 import {housingGuestsSort} from './sorting-information/housing-guests.js';
+import {housingFeaturesSort} from './sorting-information/housing-features.js';
+import {sortingInformation} from './sorting-information/sorting-information.js';
 
 const resetButton = document.querySelector('.ad-form__reset');
 
@@ -23,15 +25,17 @@ createMap();
 
 const fetchOffers = fillingInfo(
   (offers) => {
+    // housingTypeSort(offers);
+    // housingPriceSort(offers);
+    // housingRoomsSort(offers);
+    // housingGuestsSort(offers);
+    // housingFeaturesSort(offers);
+    sortingInformation(offers);
+
     const offersSlice = offers.slice(0, 10);
     offersSlice.forEach((offer) => {
       createMapLable(offer);
     });
-    const offersMain = offers;
-    housingTypeSort(offersMain);
-    housingPriceSort(offersMain);
-    housingRoomsSort(offersMain);
-    housingGuestsSort(offersMain);
   },
   (err) => {
     showErrorMessage(err);
