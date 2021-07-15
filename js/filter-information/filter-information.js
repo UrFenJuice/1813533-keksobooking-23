@@ -1,9 +1,11 @@
 import {createMapLable, markerGroup} from '../utils/create-map-lable.js';
+import {debounce} from '../utils/debounce.js';
 
 const filterInformation = (offers) => {
   const form = document.querySelector('.map__filters');
   const featuresValue = [];
   const filterChangeHandler = function (evt) {
+    evt.preventDefault();
     const allFilters = document.querySelectorAll('.map__filter');
     const allFiltersValue = [];
 
@@ -63,7 +65,7 @@ const filterInformation = (offers) => {
       if (!item.offer.features) {
         return false;
       }
-      return featuresValue.every((elem) => item.offer.features.includes(elem));
+      return featuresValue.every((element) => item.offer.features.includes(element));
     };
 
     let offerSort = [];
@@ -79,7 +81,7 @@ const filterInformation = (offers) => {
     });
   };
 
-  form.addEventListener('change', filterChangeHandler);
+  form.addEventListener('change', debounce(filterChangeHandler));
 };
 
 export {filterInformation};
