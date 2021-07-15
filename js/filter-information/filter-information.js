@@ -6,7 +6,7 @@ const filterInformation = (offers) => {
   const filterChangeHandler = function (evt) {
     const allFilters = document.querySelectorAll('.map__filter');
     const allFiltersValue = [];
-    
+
 
     markerGroup.clearLayers();
 
@@ -53,20 +53,17 @@ const filterInformation = (offers) => {
       }
       return false;
     };
-    
-    if (evt.target.name === "features" && evt.target.checked) {
+
+    if (evt.target.name === 'features' && evt.target.checked) {
       featuresValue.push(evt.target.value);
-    } else if (evt.target.name === "features" && !evt.target.checked) {
+    } else if (evt.target.name === 'features' && !evt.target.checked) {
       featuresValue.pop(evt.target.value);
     }
-
     const filterFeatures = (item) => {
-      for (let index = 0; index < featuresValue.length; index++) {
-        if (item.offer.features) {
-          return item.offer.features.includes(featuresValue[index]);
-        }
+      if (!item.offer.features) {
         return false;
       }
+      return featuresValue.every((elem) => item.offer.features.includes(elem));
     };
 
     let offerSort = [];
