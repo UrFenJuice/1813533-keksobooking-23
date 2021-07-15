@@ -1,6 +1,6 @@
 let data = null;
 
-export const getData = () => new Promise(
+const getData = () => new Promise(
   (resolve, reject) => {
     if (data) {
       resolve(data);
@@ -15,3 +15,5 @@ export const getData = () => new Promise(
         .catch(reject);
     }
   });
+
+export {getData};
