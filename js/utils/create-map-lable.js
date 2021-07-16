@@ -32,4 +32,4 @@ const createMapLable = (item) => {
     );
 };
 
-export {createMapLable};
+export {createMapLable, markerGroup};

@@ -63,8 +63,8 @@ const createOffers = function (length) {
   for (let index = 0; index <= length - 1; ++index) {
     offers[index] = {
       author: getAuthor(),
-      offer: getLocation(),
-      location: getOffer(),
+      location: getLocation(),
+      offer: getOffer(),
     };
   }
   return offers;
