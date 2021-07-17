@@ -70,7 +70,6 @@ const createAd = (offer) => {
     photosBlock.style.display = 'none';
   }
 
-
   element.querySelector('.popup__avatar').src = offer.author.avatar;
 
   for (let index = 0; index < allElements.length; index++) {
