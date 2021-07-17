@@ -36,12 +36,16 @@ const createAd = (offer) => {
   const featureListElement = element.querySelector('.popup__features');
 
   if(features) {
-    // собираем html-строку, состоящую из нужных тегов
-    const featuresHtml = features.map(
-      (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью `.map` собираем массив из строк
-    ).join(''); // методом .join склеиваем его в одну строку
 
-    featureListElement.innerHTML = featuresHtml;
+    const featuresFragment = document.createDocumentFragment();
+    features.forEach((feature) => {
+      const featureElement = document.createElement('li');
+      featureElement.classList.add('popup__feature', `popup__feature--${feature}`);
+
+      featuresFragment.appendChild(featureElement);
+    });
+    featureListElement.textContent = '';
+    featureListElement.appendChild(featuresFragment);
   } else {
     featureListElement.style.display = 'none';
   }
