@@ -4,7 +4,6 @@ const fileChooser = document.querySelector('.ad-form__input');
 const preview = document.querySelector('.ad-form__photo');
 const photo = document.createElement('img');
 
-
 fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
