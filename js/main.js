@@ -11,6 +11,8 @@ import {showErrorMessage} from './filling-information/show-error-message.js';
 import {resetForm} from './filling-information/reset-form.js';
 
 import {filterInformation} from './filter-information/filter-information.js';
+import './filling-information/preview-avatar.js';
+import './filling-information/preview-house.js';
 
 const resetButton = document.querySelector('.ad-form__reset');
 
