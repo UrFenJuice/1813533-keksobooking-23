@@ -1,7 +1,7 @@
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
-const housesType = [
+const HOUSES_TYPES = [
   {
     type: 'bungalow',
     price: 0,
@@ -103,10 +103,10 @@ const capacityChangeHandler = function (evt) {
 capacity.addEventListener('change', capacityChangeHandler);
 
 const roomValueValidate = function (targetElement) {
-  for (let index = 0; index < housesType.length; index++) {
-    if (housesType[index].type === targetElement.value) {
-      price.min = housesType[index].price;
-      price.placeholder = housesType[index].price;
+  for (let index = 0; index < HOUSES_TYPES.length; index++) {
+    if (HOUSES_TYPES[index].type === targetElement.value) {
+      price.min = HOUSES_TYPES[index].price;
+      price.placeholder = HOUSES_TYPES[index].price;
     }
   }
 };
