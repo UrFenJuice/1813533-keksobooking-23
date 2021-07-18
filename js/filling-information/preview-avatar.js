@@ -1,4 +1,4 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+import {FILE_TYPES} from '../utils/constants.js';
 
 const fileChooser = document.querySelector('.ad-form-header__input');
 const preview = document.querySelector('.ad-form-header__preview img');
