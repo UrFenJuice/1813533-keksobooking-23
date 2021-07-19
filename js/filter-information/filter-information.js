@@ -1,5 +1,6 @@
 import {createMapLable, markerGroup} from '../utils/create-map-lable.js';
 import {debounce} from '../utils/debounce.js';
+import {MIN_OFFER_PRICE, MAX_OFFER_PRICE} from '../utils/constants.js';
 
 const filterInformation = (offers) => {
   const form = document.querySelector('.map__filters');
@@ -27,11 +28,11 @@ const filterInformation = (offers) => {
 
     const filterPrice = (item) => {
       if (allFiltersValue[1] === 'middle') {
-        return item.offer.price >= 10000 && item.offer.price <= 50000;
+        return item.offer.price >= MIN_OFFER_PRICE && item.offer.price <= MAX_OFFER_PRICE;
       } else if (allFiltersValue[1] === 'low') {
-        return item.offer.price <= 10000;
+        return item.offer.price <= MIN_OFFER_PRICE;
       } else if (allFiltersValue[1] === 'high') {
-        return item.offer.price >= 50000;
+        return item.offer.price >= MAX_OFFER_PRICE;
       } else if (allFiltersValue[1] === 'any') {
         return true;
       }

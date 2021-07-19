@@ -1,28 +1,4 @@
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
-const MAX_PRICE = 1000000;
-const HOUSES_TYPES = [
-  {
-    type: 'bungalow',
-    price: 0,
-  },
-  {
-    type: 'flat',
-    price: 1000,
-  },
-  {
-    type: 'hotel',
-    price: 3000,
-  },
-  {
-    type: 'house',
-    price: 5000,
-  },
-  {
-    type: 'palace',
-    price: 10000,
-  },
-];
+import {MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MAX_PRICE, HOUSES_TYPES, MAX_ROOMS} from '../utils/constants.js';
 
 const form = document.querySelector('.ad-form');
 const title = form.querySelector('#title');
@@ -64,7 +40,7 @@ price.addEventListener('input', priceValidate);
 const roomNumberValidate = function (targetElement) {
 
   if (+targetElement.value >= +capacity.value) {
-    if (+targetElement.value === 100 && +capacity.value !== 0) {
+    if (+targetElement.value === MAX_ROOMS && +capacity.value !== 0) {
       targetElement.setCustomValidity(`Эта недвижимость ${ capacity.querySelector('option[value="0"]').textContent }`);
     } else {
       targetElement.setCustomValidity('');
@@ -83,8 +59,8 @@ roomNumber.addEventListener('change', roomNumberChangeHandler);
 
 const capacityValidate = function (targetElement) {
   if (+targetElement.value <= +roomNumber.value) {
-    if (+targetElement.value === 0 && +roomNumber.value !== 100) {
-      targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector('option[value="100"]').textContent }`);
+    if (+targetElement.value === 0 && +roomNumber.value !== MAX_ROOMS) {
+      targetElement.setCustomValidity(`${ targetElement.options[targetElement.selectedIndex].textContent } ${ roomNumber.querySelector(`option[value="${MAX_ROOMS}"]`).textContent }`);
 
     } else {
       targetElement.setCustomValidity('');

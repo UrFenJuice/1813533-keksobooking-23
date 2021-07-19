@@ -1,29 +1,28 @@
 import {activateApp} from '../state/activate-app.js';
+import {DEFAULT_LAT, DEFAULT_LNG, DEFAULT_ZOOM, ICON_URL, DEFAULT_ICON_SIZE, DEFAULT_ICON_ANCHOR, MAX_NUM_OF_DECIMAL_PLACES} from './constants.js';
 
-const defaultLat = 35.68950;
-const defaultLng = 139.69171;
 const address = document.querySelector('#address');
 address.readonly = true;
 
 const map = L.map('map-canvas')
   .setView({
-    lat: defaultLat,
-    lng: defaultLng,
-  }, 10);
+    lat: DEFAULT_LAT,
+    lng: DEFAULT_LNG,
+  }, DEFAULT_ZOOM);
 
 const markerGroup = L.layerGroup().addTo(map);
 
 const mainPinIcon = L.icon({
-  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconUrl: ICON_URL,
+  iconSize: DEFAULT_ICON_SIZE,
+  iconAnchor: DEFAULT_ICON_ANCHOR,
 });
 
 const createMarker = () => {
   const mainPinMarker = L.marker(
     {
-      lat: defaultLat,
-      lng: defaultLng,
+      lat: DEFAULT_LAT,
+      lng: DEFAULT_LNG,
     },
     {
       draggable: true,
@@ -36,7 +35,7 @@ const createMarker = () => {
 
   mainPinMarker.on('dragend',(evt)=> {
     const chagedPos = evt.target.getLatLng();
-    address.value = `${ chagedPos.lat.toFixed(5) }, ${ chagedPos.lng.toFixed(5) }`;
+    address.value = `${ chagedPos.lat.toFixed(MAX_NUM_OF_DECIMAL_PLACES) }, ${ chagedPos.lng.toFixed(MAX_NUM_OF_DECIMAL_PLACES) }`;
   });
 };
 
@@ -54,4 +53,4 @@ const createMap = () => {
   map.whenReady(activateApp);
 };
 
-export {createMap, map, defaultLat, defaultLng, address, markerGroup, mainPinIcon, createMarker};
+export {createMap, map, address, markerGroup, mainPinIcon, createMarker};

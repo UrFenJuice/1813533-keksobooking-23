@@ -3,6 +3,7 @@ import {deactivateApp} from './state/deactivate-app.js';
 
 import {createMap} from './utils/create-map.js';
 import {createMapLable} from './utils/create-map-lable.js';
+import {MAX_OFFERS} from './utils/constants.js';
 
 import {getData} from './filling-information/data.js';
 import {initializeForm} from './filling-information/initialize-form.js';
@@ -24,7 +25,7 @@ getData()
   .then((data) => {
     filterInformation(data);
 
-    const offersSlice = data.slice(0, 10);
+    const offersSlice = data.slice(0, MAX_OFFERS);
     offersSlice.forEach((offer) => {
       createMapLable(offer);
     });
@@ -36,7 +37,9 @@ getData()
 
 initializeForm();
 
-resetButton.addEventListener('click', (evt) => {
+const resetFormChangeHandler = (evt) => {
   evt.preventDefault();
   resetForm();
-});
+};
+
+resetButton.addEventListener('click', resetFormChangeHandler);

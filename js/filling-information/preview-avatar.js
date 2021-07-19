@@ -3,7 +3,7 @@ import {FILE_TYPES} from '../utils/constants.js';
 const fileChooser = document.querySelector('.ad-form-header__input');
 const preview = document.querySelector('.ad-form-header__preview img');
 
-fileChooser.addEventListener('change', () => {
+const fileChooserChangeHandler = () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -12,10 +12,14 @@ fileChooser.addEventListener('change', () => {
   if (matches) {
     const reader = new FileReader();
 
-    reader.addEventListener('load', () => {
+    const readerChangeHandler = () => {
       preview.src = reader.result;
-    });
+    };
+
+    reader.addEventListener('load', readerChangeHandler);
 
     reader.readAsDataURL(file);
   }
-});
+};
+
+fileChooser.addEventListener('change', fileChooserChangeHandler);

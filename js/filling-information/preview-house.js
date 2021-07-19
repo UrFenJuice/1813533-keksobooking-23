@@ -1,10 +1,10 @@
-import {FILE_TYPES} from '../utils/constants.js';
+import {FILE_TYPES, PHOTO_WIDTH, PHOTO_HEIGHT} from '../utils/constants.js';
 
 const fileChooser = document.querySelector('.ad-form__input');
 const preview = document.querySelector('.ad-form__photo');
 const photo = document.createElement('img');
 
-fileChooser.addEventListener('change', () => {
+const fileChooserChangeHandler = () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -14,13 +14,17 @@ fileChooser.addEventListener('change', () => {
     const reader = new FileReader();
 
     preview.appendChild(photo);
-    photo.width = 70;
-    photo.height = 70;
+    photo.width = PHOTO_WIDTH;
+    photo.height = PHOTO_HEIGHT;
 
-    reader.addEventListener('load', () => {
+    const readerChangeHandler = () => {
       photo.src = reader.result;
-    });
+    };
+
+    reader.addEventListener('load', readerChangeHandler);
 
     reader.readAsDataURL(file);
   }
-});
+};
+
+fileChooser.addEventListener('change', fileChooserChangeHandler);

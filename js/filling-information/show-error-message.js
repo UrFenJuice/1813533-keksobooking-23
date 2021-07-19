@@ -4,10 +4,6 @@ const showErrorMessage = (error) => {
   const fragment = document.createDocumentFragment();
   const element = template.cloneNode(true);
 
-  const closeButton = document.querySelector('.error__button');
-  const popup = document.querySelector('.error');
-  const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
-
   if (error) {
     element.querySelector('.error__message').textContent = error;
   }
@@ -15,13 +11,16 @@ const showErrorMessage = (error) => {
   fragment.appendChild(element);
   document.querySelector('body').appendChild(fragment);
 
+  const closeButton = document.querySelector('.error__button');
+  const popup = document.querySelector('.error');
+  const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-  closeButton.addEventListener('click', () => {
+  const closePopupChangeHandler = () => {
     popup.remove();
-  });
-  popup.addEventListener('click', () => {
-    popup.remove();
-  });
+  };
+
+  closeButton.addEventListener('click', closePopupChangeHandler);
+  popup.addEventListener('click', closePopupChangeHandler);
 
   const onPopupEscKeydown = (evt) => {
     if (isEscEvent(evt)) {

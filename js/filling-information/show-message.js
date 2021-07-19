@@ -15,9 +15,11 @@ const showMessage = () => {
   const popup = document.querySelector('.success');
   const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-  popup.addEventListener('click', () => {
+  const closePopupChangeHandler = () => {
     popup.remove();
-  });
+  };
+
+  popup.addEventListener('click', closePopupChangeHandler);
 
   const onPopupEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
