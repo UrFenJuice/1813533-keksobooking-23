@@ -1,17 +1,6 @@
 import {resetForm} from './reset-form.js';
 
-const showMessage = () => {
-  const card = document.querySelector('#success').content;
-  const template = card.querySelector('.success');
-
-  const fragment = document.createDocumentFragment();
-
-  const element = template.cloneNode(true);
-
-  fragment.appendChild(element);
-
-  document.querySelector('body').appendChild(fragment);
-
+const closePopup = () => {
   const popup = document.querySelector('.success');
   const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
@@ -28,6 +17,21 @@ const showMessage = () => {
     }
   };
   document.addEventListener('keydown', onPopupEscKeydown);
+};
+
+const showMessage = () => {
+  const card = document.querySelector('#success').content;
+  const template = card.querySelector('.success');
+
+  const fragment = document.createDocumentFragment();
+
+  const element = template.cloneNode(true);
+
+  fragment.appendChild(element);
+
+  document.querySelector('body').appendChild(fragment);
+
+  closePopup();
 
   resetForm();
 };
